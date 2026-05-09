@@ -6,12 +6,39 @@ The idea is to use a Trie so that given a prefix (like "pra"), we can quickly fe
 
 ---
 
+## How it works
+
+We store all usernames in a Trie (prefix tree).
+
+* While inserting, each character goes into a node level by level
+* For searching a prefix, we first traverse the Trie till that prefix
+* If prefix exists, we start a DFS from that node to collect all possible usernames
+
+Also added lazy delete:
+
+* Instead of removing nodes, we just mark a username as deleted
+* While returning results, we ignore the deleted ones
+
+This keeps the implementation simple and avoids complex memory handling.
+
+---
+
 ## What it does
 
 * Insert usernames
 * Check if a username exists
 * Get all usernames starting with a prefix
 * Lazy delete (mark user as deleted instead of removing from memory, basically soft-delete)
+
+---
+
+## Time Complexity
+
+* Insert: O(N)
+* Search: O(N)
+* Prefix search: O(N + K)
+
+(N = length of string, K = number of results)
 
 ---
 
@@ -50,16 +77,6 @@ Using Trie:
 * Each character is a node
 * Prefix traversal is fast → O(length)
 * DFS gives all matching usernames
-
----
-
-## Time Complexity
-
-* Insert: O(L)
-* Search: O(L)
-* Prefix search: O(L + K)
-
-(L = length of string, K = number of results)
 
 ---
 
